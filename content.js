@@ -108,7 +108,7 @@ function restore_options()
 				}
 				selec=(typeof isBl[2]!=='undefined')?isBl[2]:``;
 				if(selec!==``){
-                    let stylFunc=`document.head.insertAdjacentHTML('afterbegin','<STYLE>${selec}</STYLE>')`;
+                    let stylFunc=`document.head.insertAdjacentHTML('afterbegin',\`<STYLE>${selec}</STYLE>\`)`;
 					setTimeout('(()=>{'+stylFunc+'})();',0);
 				}
 			}
