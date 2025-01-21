@@ -21,13 +21,14 @@ function findIndexTotalInsens(string, substring, index) {
 }
 
 function blacklistMatch(array, t) {
+    var out=[];
     var found = false;
 	var blSite='';
 	var blSel='';
 	var blFcn=``;
     if (!((array.length == 1 && array[0] == "") || (array.length == 0))) {
         ts = t.toLocaleLowerCase();
-        for (var i = 0; i < array.length; i++) {
+        for (var i = array.length-1; i>=0; --i) {
             let spl = array[i].split('*');
             spl = removeEls("", spl);
 
@@ -59,15 +60,15 @@ function blacklistMatch(array, t) {
 
             }
             if(found){
-            		blSite = array[i];
+                 blSite = array[i];
            		 blSel = slctrs[i];
            		 blFcn = fcns[i];
-          		  i = array.length - 1;
+                 out.unshift([blSite,blSel,blFcn]);
             }
         }
     }
     //console.log(found);
-    return [found,blSite,blSel,blFcn];
+    return out;
 
 }
 
@@ -101,16 +102,19 @@ function restore_options()
 		}
 
 		var isBl=isCurrentSiteBlacklisted();
-			if(isBl[0]){
-				fcn=(typeof isBl[3]!=='undefined')?isBl[3]:``;
-				if(fcn!==``){
-                    setTimeout('(()=>{'+fcn+'})();',0);
-				}
-				selec=(typeof isBl[2]!=='undefined')?isBl[2]:``;
-				if(selec!==``){
-                    let stylFunc=`document.head.insertAdjacentHTML('afterbegin',\`<STYLE>${selec}</STYLE>\`)`;
-					setTimeout('(()=>{'+stylFunc+'})();',0);
-				}
+			if(isBl.length>0){
+                for(let i=0, len=isBl.length; i<len; ++i){
+                    let isBl_i=isBl[i];
+                    fcn=(typeof isBl_i[2]!=='undefined')?isBl_i[2]:``;
+                    if(fcn!==``){
+                        setTimeout('(()=>{'+fcn+'})();',0);
+                    }
+                    selec=(typeof isBl_i[1]!=='undefined')?isBl_i[1]:``;
+                    if(selec!==``){
+                        let stylFunc=`document.head.insertAdjacentHTML('afterbegin',\`<STYLE>${selec}</STYLE>\`)`;
+                        setTimeout('(()=>{'+stylFunc+'})();',0);
+                    }
+                }
 			}
 		}
 		else
