@@ -1,0 +1,1 @@
+Inject CSS and Javascript code into any webpage that matches the pattern specified ('*' being a wildcard character). If multiple patterns match the current URL, then their injections will all be made.
