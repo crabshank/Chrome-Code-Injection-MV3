@@ -40,8 +40,11 @@ ipb.oninput=(e)=>{
         for(let i=0, len_i=setts.length/3; i<len_i; ++i){
             let sss=document.querySelectorAll('SECTION.site_sets');
 			let sssl=sss.length;
-            let ss=(sssl>1 || i>0)?forceNewSct(sss[sssl-1]):sss[0];
+            let ss=sss[sssl-1];
             let ssc=ss.children;
+            if(i>0 || (ssc[0].value.trim()!=='' || ssc[1].value.trim()!=='' || ssc[2].value.trim()==='')){
+                ss=forceNewSct(ss);
+            }
             let x=i*3;
             for(let j=0; j<3; ++j){
                 ssc[j].value=setts[x+j];
