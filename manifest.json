@@ -1,23 +1,21 @@
 {
   "manifest_version": 3,
   "name": "Code inject MV3",
-  "options_page":  "options.html",
-  "version": "2025.1",
-  "content_scripts": [
-    {
-	      "all_frames": true,
-      "matches": [
-        "<all_urls>"
-      ],
-      "js": ["content.js"]
-    }
+  "version": "2026.10",
+  "permissions": [
+    "storage",
+	"unlimitedStorage",
+    "userScripts",
+	"offscreen"
   ],
-  "permissions": ["storage","unlimitedStorage"],
-  "action": {
-    "default_icon": "icon.png",
-    "default_title": "Code inject MV3"
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
   },
-  	"icons": {
+  "options_page": "options.html",
+  "icons": {
         "128": "icon.png"
-    }
+  }
 }
