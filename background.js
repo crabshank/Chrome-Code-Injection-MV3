@@ -181,16 +181,17 @@ async function syncUserScripts() {
   }
 
   const scripts = rules.map((rule, index) => ({
-    id: `${RULE_ID_PREFIX}${index}`,
-    matches: ['<all_urls>'],
-    runAt: 'document_idle',
-    world: 'USER_SCRIPT',
-    js: [
-      {
-        code: buildUserScriptCode(rule, index)
-      }
-    ]
-  }));
+      id: `${RULE_ID_PREFIX}${index}`,
+      matches: ['<all_urls>'],
+      allFrames: true,
+      runAt: 'document_idle',
+      world: 'USER_SCRIPT',
+      js: [
+                {
+                  code: buildUserScriptCode(rule, index)
+                }
+            ]
+    }));
 
   try {
     await chrome.userScripts.register(scripts);
