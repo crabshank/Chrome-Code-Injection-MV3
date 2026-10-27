@@ -20,7 +20,7 @@ function createOffscreen2() {
 chrome.runtime.onStartup.addListener(createOffscreen2);
 createOffscreen2();
 
-const RULE_ID_PREFIX = 'site-injector-rule-';
+const RULE_ID_PREFIX = 'code-injector-rule-';
 
 function parseStoredList(value) {
   if (Array.isArray(value)) {
@@ -184,7 +184,7 @@ async function syncUserScripts() {
       id: `${RULE_ID_PREFIX}${index}`,
       matches: ['<all_urls>'],
       allFrames: true,
-      runAt: 'document_idle',
+      runAt: 'document_start',
       world: 'USER_SCRIPT',
       js: [
                 {

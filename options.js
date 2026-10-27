@@ -87,7 +87,7 @@ function sectionHasRule(section) {
 
 function createSection(values = ['', '', '']) {
   const section = document.createElement('section');
-  section.className = 'site_sets';
+  section.className = 'code_sets';
   section.style.cssText = 'display: inline !important;';
 
   section.innerHTML = `
@@ -122,7 +122,7 @@ function createSection(values = ['', '', '']) {
 }
 
 function ensureTrailingEmptySection() {
-  const sections = [...document.querySelectorAll('section.site_sets')];
+  const sections = [...document.querySelectorAll('section.code_sets')];
 
   if (sections.length === 0) {
     const first = createSection();
@@ -141,7 +141,7 @@ function ensureTrailingEmptySection() {
 }
 
 function ensureSectionBehaviour(section) {
-  const sections = [...document.querySelectorAll('section.site_sets')];
+  const sections = [...document.querySelectorAll('section.code_sets')];
   const isLast = sections[sections.length - 1] === section;
 
   if (sectionHasRule(section) && isLast) {
@@ -158,7 +158,7 @@ function ensureSectionBehaviour(section) {
 }
 
 function clearSections() {
-  document.querySelectorAll('section.site_sets').forEach(section => {
+  document.querySelectorAll('section.code_sets').forEach(section => {
     section.remove();
   });
 }
@@ -197,7 +197,7 @@ async function restoreOptions() {
 }
 
 async function saveOptions() {
-  const sections = [...document.querySelectorAll('section.site_sets')];
+  const sections = [...document.querySelectorAll('section.code_sets')];
 
   const addrs = [];
   const csses = [];
@@ -257,7 +257,7 @@ function downloadText(filename, text) {
 
 function exportSettings() {
   const values = [
-    ...document.querySelectorAll('section.site_sets textarea')
+    ...document.querySelectorAll('section.code_sets textarea')
   ].map(textarea => textarea.value);
 
   const json = JSON.stringify(values);
